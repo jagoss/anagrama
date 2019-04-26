@@ -1,27 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "anagramas_bintree.h"
 #define MAXWORD 32
 
 extern char * fgetword_normalizada (FILE *fp, char *word, int maxword);
-
-struct listnode {       // representa un nodo de una lista simple, ordenada alfabéticamente
-        char *pal;      // una palabra
-        struct listnode *sig; // el siguiente nodo en la lista; NULL si no hay
-};
-
-typedef struct listnode LN ; // un sinónimo para no tener que escribir "struct xxx"
-
-struct treenode {       // representa un nodo de árbol binario ordenado por clave
-        char *clave;    // la clave de las palabras que tienen el mismo anagrama
-    int cantpal; // la cantidad de palabras que hay en la lista
-        struct listnode *palabras;      // la lista de palabras
-        struct treenode *izq;           // puntero a subárbol izquierdo
-        struct treenode *der;           // puntero a subárbol derecho
-};
-
-typedef struct treenode TN; // un sinónimo para no tener que escribir "struct xxx"
-
 
 /*
  * FUNCIONES A DESARROLLAR POR LOS ALUMNOS
@@ -159,18 +142,18 @@ TN * crear_arbol_dic(char *nombrearchivo){
 
 int main(int argc, char *argv[]){
 
-        TN *miarbol = crear_arbol_dic("/usr/share/dict/spanish");
+        TN *miarbol = crear_arbol_dic("/home/juan/Documents/facultad/s5/tic2/anagrama/dir/spanish");
 
         //for(int i = 0; i < argc; i++){
                 TN *resultado = tree_buscar_pal(miarbol, "amor");
 
-                LN *palabras = malloc(sizeof(LN));
-                palabras =  resultado ->palabras;
+                struct listnode palabras;
+                palabras = *resultado ->palabras;
                 printf("%s: ", "amor");
-                while(palabras != NULL){
 
-                        printf("        %s\n", palabras->pal);
-                        palabras = palabras->sig;
+                while( &palabras != NULL){
+                        printf("    %s\n", palabras.pal);
+                        palabras = *palabras.sig;
                 }
         //}
         return 0;

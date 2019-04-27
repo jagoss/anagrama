@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 extern char * fgetword_normalizada (FILE *fp, char *word, int maxword);
 
 struct listnode {	// representa un nodo de una lista simple, ordenada alfabéticamente

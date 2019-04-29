@@ -65,7 +65,6 @@ TN *tree_agregar_pal(TN *p, char *w) {
     if (p == NULL) {                    /* a new word has arrived */
         p = malloc(sizeof(TN)); /* make a new node */
         p->clave = strdup(clave);
-
         p->palabras = list_agregar_pal(p->palabras, w);
         p->cantpal = 1;
 
@@ -98,7 +97,7 @@ TN *tree_buscar_pal(TN *raiz, char *pal) {
     generar_clave(clave, pal, MAXWORD);
 
     if (raiz == NULL) {
-        printf("NO EXISTE ARBOL");
+        printf("NO EXISTE ARBOL \n");
         return NULL;
 
     } else if ((cond = strcmp(clave, raiz->clave)) == 0) {
@@ -143,7 +142,9 @@ int main(int argc, char *argv[]) {
 
     TN *miarbol = crear_arbol_dic("/home/juan/Documents/facultad/s5/tic2/anagrama/dir/spanish");
 
-    for (int i = 0; i < argc; i++) {
+    for (int i = 1; i < argc; i++) {
+        *argv++;
+
         TN *resultado = tree_buscar_pal(miarbol, *argv);
 
         LN *palabras = resultado->palabras;
@@ -154,7 +155,6 @@ int main(int argc, char *argv[]) {
             printf("\t%s\n", palabras->pal);
             palabras = palabras->sig;
         }
-        argv++;
     }
     return 0;
 }

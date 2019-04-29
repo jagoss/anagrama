@@ -123,7 +123,7 @@ TN *crear_arbol_dic(char *nombrearchivo) {
     FILE *fp = fopen(nombrearchivo, "r");
 
     if (fp == NULL) {
-        printf("ERROR ARCHIVO VACIO");
+        printf("ERROR ARCHIVO VACIO \n");
         return NULL;
     }
 
